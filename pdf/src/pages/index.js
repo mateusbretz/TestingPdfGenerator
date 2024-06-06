@@ -39,7 +39,7 @@ export default function Home() {
             <h1>Certificado de Posse de Árvore</h1>
             <p>
               Este certificado confirma que <strong>{userName}</strong> é o
-              propietario da árvore <strong>{treeName}</strong>.
+              proprietário da árvore <strong>{treeName}</strong>.
             </p>
             <p>Data da Aquisição: {new Date().toLocaleDateString()}</p>
           </Content>
