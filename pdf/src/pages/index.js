@@ -8,7 +8,8 @@ const customization = {
   method: "open",
   page: {
     // Definir margem: SMALL ou MEDIUM
-    margin: Margin.MEDIUM,
+    // margin: Margin.MEDIUM, //Certo seria assim, mas não centralizou no pdf
+    margin: { top: 50, right: 40, bottom: 10, left: 60 },
     // Formato da página: A4 ou letter
     format: "A4",
     // Orientação do arquivo: portrait ou landscape
