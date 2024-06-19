@@ -1,14 +1,14 @@
 import Head from "next/head";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import generatePDF, { Margin } from "react-to-pdf";
-import { Main, Content, Button } from "./styles";
+import { Main, Button } from "./styles";
 
 const customization = {
-  //Baixar/Salvar = save / Abrir no navegador = open
+  // Baixar/Salvar = save / Abrir no navegador = open
   method: "open",
   page: {
     // Definir margem: SMALL ou MEDIUM
-    // margin: Margin.MEDIUM, //Certo seria assim, mas não centralizou no pdf
+    // margin: Margin.MEDIUM, // Certo seria assim, mas não centralizou no pdf
     margin: { top: 50, right: 40, bottom: 10, left: 60 },
     // Formato da página: A4 ou letter
     format: "A4",
@@ -23,6 +23,15 @@ export default function Home() {
 
   const recoverContentToPDF = () => document.getElementById("content-id");
 
+  const handleGeneratePDF = () => {
+    const content = document.getElementById("content-id");
+    content.style.display = "block"; // Mostra o conteúdo antes de gerar o PDF
+
+    generatePDF(recoverContentToPDF, customization).then(() => {
+      content.style.display = "none"; // Esconde o conteúdo após gerar o PDF
+    });
+  };
+
   return (
     <>
       <Head>
@@ -30,20 +39,16 @@ export default function Home() {
       </Head>
       <Main>
         <div>
-          <Button
-            onClick={() => generatePDF(recoverContentToPDF, customization)}
-          >
-            Gerar Certificado
-          </Button>
+          <Button onClick={handleGeneratePDF}>Gerar Certificado</Button>
 
-          <Content id="content-id">
+          <div id="content-id" style={{ display: "none" }}>
             <h1>Certificado de Posse de Árvore</h1>
             <p>
               Este certificado confirma que <strong>{userName}</strong> é o
               proprietário da árvore <strong>{treeName}</strong>.
             </p>
             <p>Data da Aquisição: {new Date().toLocaleDateString()}</p>
-          </Content>
+          </div>
         </div>
       </Main>
     </>
